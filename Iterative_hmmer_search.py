@@ -117,8 +117,8 @@ class Iterative_search:
         else:
             exist = True
         if exist:
-            os.system('hmmsearch --cpu 7 -o atej --tblout ' + 'test_oskar_lotus.out ' + '/home/lblondel/Documents/Harvard/ExtavourLab/Project_Oskar_HGT/Sequences/HMM/LOTUS-refined.hmm ' + '%s.fasta' % accID)
-            os.system('hmmsearch --cpu 7 -o atej --tblout ' + 'test_oskar_sgnh.out ' + '/home/lblondel/Documents/Harvard/ExtavourLab/Project_Oskar_HGT/Sequences/HMM/SGNH-refined.hmm ' + '%s.fasta' % accID)
+            os.system('hmmsearch --cpu 7 -o atej --tblout ' + 'test_oskar_lotus.out ' + './Data/LOTUS-refined.hmm ' + '%s.fasta' % accID)
+            os.system('hmmsearch --cpu 7 -o atej --tblout ' + 'test_oskar_sgnh.out ' + './Data/SGNH-refined.hmm ' + '%s.fasta' % accID)
             lotus = self.Parse_HMMER_output("test_oskar_lotus.out")
             sgnh = self.Parse_HMMER_output("test_oskar_sgnh.out")
             if len(sgnh) > 0 and len(lotus) == 0:
