@@ -11,7 +11,11 @@ Iterative HMMER search algorithm
 ## Software
 * HMMER suite
 ## Protein Database
-You will need a protein database to search against. You can for example use TREMBL. The database needs to be in the `FASTA` format.
+You will need a protein database to search against. We recommend you use TREMBL. The database needs to be in the `FASTA` format.
+
+You can download TREMBL from this ftp: ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_trembl.fasta.gz
+
+Informations here: https://www.uniprot.org/downloads
 ## Alignement
 You will need an alignement to draw from such that we can build HMM with the rolling window. The alignment must be in `FASTA`.
 

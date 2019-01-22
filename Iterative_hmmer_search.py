@@ -18,19 +18,19 @@ import progressbar
 
 class Iterative_search:
 
-    def __init__(self, alignpath, window, name, db=None, osk=False, preprocess=True):
+    def __init__(self, alignpath, window, name, db, osk=False, preprocess=True):
         # self.idmap_path = 'idmapping_reduced.tab'
-        self.db = '/scratch/uniprot_trembl.fasta'
+        # self.db = './Data/uniprot_trembl.fasta'
         self.osk = osk
         if preprocess is None:
             self.preprocess = True
         else:
             self.preprocess = False
-        if db is not None:
-            self.db = db
+        # if db is not None:
+        self.db = db
 
-        idmap_path = "/home/lblondel/Documents/Harvard/ExtavourLab/Project_Oskar_HGT/uniprot_species.tsv"
-        idmap2_path = "/home/lblondel/Documents/Harvard/ExtavourLab/Project_Oskar_HGT/taxonomy/uniprot_ID_taxa.tsv"
+        idmap_path = "./Data/uniprot_species.tsv"
+        idmap2_path = "./Data/uniprot_ID_taxa.tsv"
         # self.UniprotID_collums = ["UniProtKB-ID", "NCBI-taxon"]
         # self.UniprotID_collums = ["UniProtKB-AC", "UniProtKB-ID", "GeneID (EntrezGene)", "RefSeq", "GI", "PDB", "GO", "UniRef100", "UniRef90", "UniRef50", "UniParc", "PIR", "NCBI-taxon",
         #                           "MIM", "UniGene", "PubMed", "EMBL", "EMBL-CDS", "Ensembl", "Ensembl_TRS", "Ensembl_PRO", "Additional PubMed"]
@@ -280,28 +280,37 @@ class Iterative_search:
 
 if __name__ == '__main__':
     parser = OptionParser()
-    parser.add_option("-a", "--alignment", dest="alignpath", default="None",
+    parser.add_option("-a", "--alignment", dest="alignpath", default=None,
                       help="[Required] Location of the FASTA alignement file.")
     parser.add_option("-w", "--window", dest="window", default="None",
                       help="[Required] Size of the sliding window (aka minimum nb of columns to be used for HMM generation)")
-    parser.add_option("-n", "--name", dest="name", default="None",
+    parser.add_option("-n", "--name", dest="name", default=None,
                       help="[Required] Name of the analysis)")
     parser.add_option("-l", "--analyze", dest="anal", action="store_true",
                       help="[Optional] Analyze only)")
     parser.add_option("-d", "--db", dest="db", default=None,
-                      help="Path to DB (default to Trembl)")
+                      help="[Required] Path to DB (default to Trembl)")
     parser.add_option("-o", "--oskar", dest="osk", action="store_true",
                       help="Is it the Oskar Gene ?")
     parser.add_option("-p", "--preprocess", dest="preprocess", action="store_true",
-                      help="Do not preprocess the search. (slower and more prone to false positives)")
+                      help="Do NOT preprocess the search. (slower and more prone to false positives)")
 
     # Parse options into variables
     (options, args) = parser.parse_args()
 
     alignpath = options.alignpath
+    if not alignpath:
+        print("You must provide an alignement.")
+        sys.exit(1)
     name = options.name
+    if not name:
+        print("You must provide a name.")
+        sys.exit(1)
     anal = options.anal
     db = options.db
+    if not db:
+        print("You must provide a database.")
+        sys.exit(1)
     osk = options.osk
     window = options.window
     preprocess = options.preprocess
